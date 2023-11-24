@@ -1,4 +1,34 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreatePlanningDto } from './create-planning.dto';
+import { IsDate, IsInt, IsOptional, IsString } from "class-validator";
+import { Transform } from "class-transformer";
 
-export class UpdatePlanningDto extends PartialType(CreatePlanningDto) {}
+export class UpdatePlanningDto {
+    @IsOptional()
+    @IsString()
+    note?: string;
+
+    @IsOptional()
+    @IsDate()
+    @Transform(({value}) => new Date(value))
+    from?: Date;
+
+    @IsOptional()
+    @IsDate()
+    @Transform(({value}) => new Date(value))
+    to?: Date;
+
+    @IsOptional()
+    @IsInt()
+    country_id?: number;
+
+    @IsOptional()
+    @IsInt()
+    city_id?: number;
+
+    @IsOptional()
+    @IsInt()
+    place_id?: number;
+
+    @IsOptional()
+    @IsInt()
+    hotel_id?: number;
+}

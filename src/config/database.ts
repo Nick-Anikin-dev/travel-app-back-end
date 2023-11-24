@@ -2,6 +2,11 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
 import { Country } from "../modules/country/entities/country.entity";
+import { City } from "../modules/city/entities/city.entity";
+import { Planning } from "../modules/planning/entities/planning.entity";
+import { User } from "../modules/user/entities/user.entity";
+import { Place } from "../modules/places/entities/place.entity";
+import { Feedback } from "../modules/feedback/entities/feedback.entity";
 
 
 enum Env {
@@ -50,6 +55,11 @@ export const DatabaseModule = TypeOrmModule.forRootAsync({
     inject: [ ConfigService ],
     useFactory: (configService: ConfigService) =>
         getDatabaseConfig(configService, [
-            Country
+            User,
+            Country,
+            City,
+            Place,
+            Planning,
+            Feedback,
         ])
 });

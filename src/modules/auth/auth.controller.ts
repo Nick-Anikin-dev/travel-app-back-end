@@ -1,34 +1,38 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { SignUpDto } from "./dto/sign-up.dto";
+import { SignInDto } from "./dto/sign-in.dto";
+import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
+import { ChangePasswordDto } from "./dto/change-password.dto";
+import { Request } from "express";
+import { JwtAuthGuard } from "../../common/guard/jwt-auth.guard";
+import { User } from "../../common/decotator/user.decorator";
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
-
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  constructor(private readonly authService: AuthService) {
   }
 
   @Get()
-  findAll() {
-    return this.authService.findAll();
+  @UseGuards(JwtAuthGuard)
+  async verify(@Req() req: Request){
+    return await this.authService.verify(req);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
+  @Post('/sign-in')
+  async signIn(@Body() signInDto: SignInDto) {
+    return await this.authService.signIn(signInDto);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
+  @Post('/sign-up')
+  async signUp(@Body() signUpDto: SignUpDto) {
+    return await this.authService.signUp(signUpDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+
+  @Patch('change-password')
+  @UseGuards(JwtAuthGuard)
+  async changePassword(@User() user: AuthUser, @Body() dto: ChangePasswordDto){
+    return this.authService.changePassword(user, dto);
   }
 }

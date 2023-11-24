@@ -1,3 +1,5 @@
+import { Flag, LatLng, Side } from "../../../../core/country/types";
+
 interface CountryName {
     common: string,
     official: string,
@@ -5,10 +7,6 @@ interface CountryName {
         [key: string]: Pick<CountryName, 'common' | 'official'>
     }
 }
-
-export type LatLng = [ number, number ];
-
-export type Side = 'right' | 'left';
 
 export type Currencies = {
     [key: string]: {
@@ -22,11 +20,6 @@ export type Idd = {
     suffixes: string[]
 }
 
-export type Flag = {
-    png: string;
-    svg: string;
-    alt: string;
-}
 
 export type ICountryData = {
     name: CountryName;
@@ -39,7 +32,6 @@ export type ICountryData = {
     unMember: boolean;
     currencies: Currencies,
     idd: Idd,
-    altSpellings: string[]
     independent: boolean;
     capital: string[];
     region: string;
@@ -51,6 +43,7 @@ export type ICountryData = {
         [key: string]: CountryName,
     },
     latlng: LatLng;
+
     car: {
         signs: string[];
         side: Side;

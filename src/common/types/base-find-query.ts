@@ -15,7 +15,7 @@ export class BaseFindQuery {
 
     @IsOptional()
     @IsEnum(['ASC', 'DESC'])
-    order?: 'ASC' | 'DESC';
+    order?: 'ASC' | 'DESC' = 'ASC';
 
     @IsOptional()
     @IsString()

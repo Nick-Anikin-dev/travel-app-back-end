@@ -8,6 +8,8 @@ import { TicketModule } from './modules/ticket/ticket.module';
 import { PlanningModule } from './modules/planning/planning.module';
 import { ConfigModule } from "@nestjs/config";
 import { CityModule } from './modules/city/city.module';
+import { HotelModule } from './modules/hotel/hotel.module';
+import { FeedbackModule } from './modules/feedback/feedback.module';
 
 @Module({
   imports: [
@@ -19,8 +21,9 @@ import { CityModule } from './modules/city/city.module';
     PlacesModule,
     TicketModule,
     PlanningModule,
-    CityModule
+    CityModule,
+    HotelModule,
+    FeedbackModule
   ],
 })
-export class AppModule {
-}
+export class AppModule {}
