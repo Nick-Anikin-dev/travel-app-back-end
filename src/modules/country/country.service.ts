@@ -28,7 +28,7 @@ export class CountryService {
                 'country.flags'
             ])
             .where(!!search && new Brackets(qb =>
-                qb.where(`country.common_name ILIKE '%${search}%'`)
+                  qb.where(`country.common_name ILIKE '%${search}%'`)
                     .orWhere(`country.official_name ILIKE '%${search}%'`)
                     .orWhere(`country.native_name ILIKE '%${search}%'`)
             ))
