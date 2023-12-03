@@ -1,8 +1,9 @@
 import { Column, Entity, OneToMany } from "typeorm";
 import { BaseEntity } from "../../../common/types/base-entity";
 import { ICountry } from "../../../core/country/interfaces/country.interface";
-import { Flag, Idd, LatLng, Side } from "../../../core/country/types";
+import { CoatOfArms, Flag, Idd, LatLng, Maps, Side } from "../../../core/country/types";
 import { City } from "../../city/entities/city.entity";
+import { ILink } from "../../../common/types/interfaces/link.interface";
 
 @Entity('country')
 export class Country extends BaseEntity implements ICountry {
@@ -179,6 +180,18 @@ export class Country extends BaseEntity implements ICountry {
     timezones: string[];
 
     @Column({
+        type: 'jsonb',
+        nullable: true,
+    })
+    maps: Maps;
+
+    @Column({
+        type: 'jsonb',
+        nullable: true,
+    })
+    coatOfArms: CoatOfArms
+
+    @Column({
         type: 'varchar',
         nullable: true,
     })
@@ -186,4 +199,22 @@ export class Country extends BaseEntity implements ICountry {
 
     @OneToMany(() => City, (city) => city.country)
     cities: City[];
+
+    @Column({
+        type: 'varchar',
+        nullable: true,
+    })
+    advantages: string;
+
+    @Column({
+        type: 'varchar',
+        nullable: true,
+    })
+    disadvantages: string;
+
+    @Column({
+        type: 'jsonb',
+        nullable: true,
+    })
+    links: ILink[];
 }

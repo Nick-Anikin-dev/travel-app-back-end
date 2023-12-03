@@ -20,7 +20,8 @@ export class PlanningService {
     return await this.planningRepository.find({
       where: {
         user_id: user.id,
-      }
+      },
+      relations: ['country']
     });
   }
 

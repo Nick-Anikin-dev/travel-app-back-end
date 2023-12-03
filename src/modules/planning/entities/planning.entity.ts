@@ -1,7 +1,8 @@
 import { User } from "../../user/entities/user.entity";
 import { BaseEntity } from "../../../common/types/base-entity";
 import { IPlanning } from "../../../core/planning/planning.interface";
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import { Country } from "../../country/entities/country.entity";
 
 @Entity('planning')
 export class Planning extends BaseEntity implements IPlanning {
@@ -55,4 +56,10 @@ export class Planning extends BaseEntity implements IPlanning {
 
     @ManyToOne(() => User, (user) => user.planning)
     user: User;
+
+    @ManyToOne(()=>Country)
+    @JoinColumn({
+        name: 'country_id'
+    })
+    country: Country;
 }

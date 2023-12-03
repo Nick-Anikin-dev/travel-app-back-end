@@ -4,10 +4,6 @@ import { IsInt, IsNotEmpty, IsString } from "class-validator";
 export class CreateFeedbackDto {
     @IsNotEmpty()
     @IsInt()
-    user_id: number;
-
-    @IsNotEmpty()
-    @IsInt()
     related_entity_id: number;
 
     @IsNotEmpty()

@@ -16,7 +16,7 @@ export class FeedbackController {
   }
 
   @Get()
-  async findAll(@User() user: AuthUser,) {
+  async findAll(@User() user: AuthUser) {
     return await this.feedbackService.findAll(user);
   }
 

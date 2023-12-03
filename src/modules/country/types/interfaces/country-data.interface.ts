@@ -1,4 +1,4 @@
-import { Flag, LatLng, Side } from "../../../../core/country/types";
+import { CoatOfArms, Flag, LatLng, Maps, Side } from "../../../../core/country/types";
 
 interface CountryName {
     common: string,
@@ -57,6 +57,8 @@ export type ICountryData = {
     continents: string[];
     timezones: string[];
     startOfWeek: string;
+    maps: Maps,
+    coatOfArms: CoatOfArms,
     capitalInfo: {
         latlng: LatLng
     }

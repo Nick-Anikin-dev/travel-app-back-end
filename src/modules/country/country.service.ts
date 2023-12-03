@@ -19,6 +19,7 @@ export class CountryService {
 
     async findAll(query: BaseFindQuery) {
         const {search, order, order_by, page, per_page} = query;
+        const take = per_page || 50;
         return await this.countryRepository.createQueryBuilder('country')
             .select([
                 'country.id',
@@ -32,14 +33,14 @@ export class CountryService {
                     .orWhere(`country.official_name ILIKE '%${search}%'`)
                     .orWhere(`country.native_name ILIKE '%${search}%'`)
             ))
-            .take(per_page || 50)
-            .skip(((page || 1) - 1) * (per_page || 50))
+            .take(take)
+            .skip(((page || 1) - 1) * take)
             .orderBy(order_by || 'country.common_name', order)
             .getMany()
     }
 
     async findOne(id: number) {
-        return await this.countryRepository.find({
+        return await this.countryRepository.findOne({
             where: {id}
         });
     }
@@ -100,6 +101,8 @@ export class CountryService {
                 borders: country.borders,
                 area: country.area,
                 flags: country.flags,
+                maps: country.maps,
+                coatOfArms: country.coatOfArms,
                 flag_string: country.flag,
                 population: country.population,
                 continents: country.continents,

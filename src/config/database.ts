@@ -7,6 +7,8 @@ import { Planning } from "../modules/planning/entities/planning.entity";
 import { User } from "../modules/user/entities/user.entity";
 import { Place } from "../modules/places/entities/place.entity";
 import { Feedback } from "../modules/feedback/entities/feedback.entity";
+import { Hotel } from "../modules/hotel/entities/hotel.entity";
+import { Ticket } from "../modules/ticket/entities/ticket.entity";
 
 
 enum Env {
@@ -61,5 +63,7 @@ export const DatabaseModule = TypeOrmModule.forRootAsync({
             Place,
             Planning,
             Feedback,
+            Hotel,
+            Ticket,
         ])
 });

@@ -11,4 +11,14 @@ export type Flag = {
     alt: string;
 }
 
+export type Maps = {
+    googleMaps: string,
+    openStreetMaps: string
+}
+
+export type CoatOfArms = {
+    svg: string;
+    png: string;
+}
+
 export type Side = 'right' | 'left';

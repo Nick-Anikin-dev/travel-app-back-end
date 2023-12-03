@@ -17,7 +17,7 @@ export class CountryController {
     return await this.countryService.findOne(+id);
   }
 
-  @Get('upload')
+  @Get('upload/all')
   async upload() {
     return await this.countryService.upload();
   }

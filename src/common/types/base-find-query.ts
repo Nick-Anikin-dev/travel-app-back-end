@@ -1,4 +1,5 @@
 import { IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
+import { Order } from "./index";
 
 export class BaseFindQuery {
     @IsOptional()
@@ -15,7 +16,7 @@ export class BaseFindQuery {
 
     @IsOptional()
     @IsEnum(['ASC', 'DESC'])
-    order?: 'ASC' | 'DESC' = 'ASC';
+    order?: Order = 'ASC';
 
     @IsOptional()
     @IsString()

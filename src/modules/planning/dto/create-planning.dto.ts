@@ -2,10 +2,6 @@ import { IsDate, IsInt, IsNotEmpty, IsOptional, IsString } from "class-validator
 import { Transform } from "class-transformer";
 
 export class CreatePlanningDto {
-    @IsNotEmpty()
-    @IsInt()
-    user_id: number;
-
     @IsOptional()
     @IsString()
     note?: string;
