@@ -34,7 +34,8 @@ function getDatabaseConfig(
                 database: configService.get("DB_DATABASE"),
                 entities,
                 migrations: [ __dirname + "/migrations/*.ts" ],
-                migrationsTableName: "migrations"
+                migrationsTableName: "migrations",
+                ssl: true,
             };
         default:
             return {
