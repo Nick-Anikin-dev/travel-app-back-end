@@ -35,7 +35,9 @@ function getDatabaseConfig(
                 entities,
                 migrations: [ __dirname + "/migrations/*.ts" ],
                 migrationsTableName: "migrations",
-                ssl: true,
+                ssl: {
+                    rejectUnauthorized: false,
+                },
             };
         default:
             return {
