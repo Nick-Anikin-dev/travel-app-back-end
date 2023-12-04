@@ -1,7 +1,8 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
 import { BaseEntity } from "../../../common/types/base-entity";
 import { ILink } from "../../../common/types/interfaces/link.interface";
 import { LatLng } from "../../../core/country/types";
+import { City } from "../../city/entities/city.entity";
 
 @Entity('hotel')
 export class Hotel extends BaseEntity {
@@ -22,6 +23,9 @@ export class Hotel extends BaseEntity {
         nullable: true,
     })
     description: string;
+
+    @ManyToOne(() => City, (city) => city.hotels)
+    city: City;
 
     @Column({
         type: 'jsonb',

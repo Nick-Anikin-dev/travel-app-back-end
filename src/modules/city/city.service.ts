@@ -36,7 +36,8 @@ export class CityService {
         return this.cityRepository.findOne({
             where: {
                 id
-            }
+            },
+            relations: ['country', '']
         });
     }
 }
