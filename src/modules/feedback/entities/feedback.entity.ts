@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne } from "typeorm";
 import { BaseEntity } from "../../../common/types/base-entity";
 import { IFeedback } from "../../../core/feedback/feeback.interface";
 import { FeedbackEntityType, FeedbackEntityTypeEnum } from "../../../core/feedback/types";
@@ -37,9 +37,9 @@ export class Feedback extends BaseEntity implements IFeedback {
     })
     related_entity_type: FeedbackEntityTypeEnum;
 
-    @ManyToMany(() => User, (user) => user.feedbacks)
-    @JoinTable({
-        name: 'user_feedbacks'
+    @ManyToOne(() => User, (user) => user.feedbacks)
+    @JoinColumn({
+        name: 'user_id'
     })
-    users: User[];
+    user: User;
 }

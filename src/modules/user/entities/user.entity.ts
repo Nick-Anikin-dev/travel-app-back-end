@@ -37,9 +37,6 @@ export class User extends BaseEntity implements IUser {
     @OneToMany(() => Ticket, (ticket) => ticket.user)
     tickets: Ticket[];
 
-    @ManyToMany(() => Feedback, (feedback) => feedback.users)
-    @JoinTable({
-        name: 'user_feedbacks'
-    })
+    @OneToMany(() => Feedback, (feedback) => feedback.user)
     feedbacks: Feedback[];
 }

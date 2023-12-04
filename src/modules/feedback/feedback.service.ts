@@ -28,15 +28,17 @@ export class FeedbackService {
       },
       order: {
         [order_by]: order,
-      }
+      },
+      relations: ['user']
     });
   }
 
   async findOne(id: number, user: AuthUser) {
     return await this.feedbackRepository.findOne({
       where: {
-        id, user_id: user.id
-      }
+        id
+      },
+      relations: ['user']
     });
   }
 
