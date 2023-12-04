@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { FeedbackService } from './feedback.service';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { UpdateFeedbackDto } from './dto/update-feedback.dto';
@@ -6,6 +6,7 @@ import { User } from "../../common/decotator/user.decorator";
 import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
 import { FindFeedbacksEntityParamsDto } from "./dto/find-feedbacks-entity-params.dto";
 import { FindFeedbacksQuery } from "./dto/find-feedbacks-query";
+import { JwtAuthGuard } from "../../common/guard/jwt-auth.guard";
 
 @Controller('feedback')
 export class FeedbackController {
@@ -13,6 +14,7 @@ export class FeedbackController {
   }
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   async create(@User() user: AuthUser, @Body() dto: CreateFeedbackDto) {
     return await this.feedbackService.create(dto, user);
   }
