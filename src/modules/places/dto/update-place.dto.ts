@@ -1,5 +1,6 @@
 import { IsArray, IsInt, IsOptional, IsString } from "class-validator";
 import { LatLng } from "../../../core/country/types";
+import { ILink } from "../../../common/types/interfaces/link.interface";
 
 export class UpdatePlaceDto {
     @IsOptional()
@@ -22,4 +23,15 @@ export class UpdatePlaceDto {
     @IsOptional()
     @IsString()
     description?: string;
+
+    @IsOptional()
+    @IsString()
+    advantages?: string;
+
+    @IsOptional()
+    @IsString()
+    disadvantages?: string;
+
+    @IsOptional()
+    links?: ILink[];
 }

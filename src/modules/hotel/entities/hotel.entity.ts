@@ -6,6 +6,12 @@ import { LatLng } from "../../../core/country/types";
 @Entity('hotel')
 export class Hotel extends BaseEntity {
     @Column({
+        type: 'int',
+        nullable: false,
+    })
+    city_id: number;
+
+    @Column({
         type: 'varchar',
         nullable: false,
     })

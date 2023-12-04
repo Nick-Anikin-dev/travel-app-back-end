@@ -11,13 +11,18 @@ export class HotelController {
   }
 
   @Post()
-  async create(@Body() createHotelDto: CreateHotelDto) {
-    return await this.hotelService.create(createHotelDto);
+  async create(@Body() dto: CreateHotelDto) {
+    return await this.hotelService.create(dto);
   }
 
   @Get()
   async findAll() {
     return await this.hotelService.findAll();
+  }
+
+  @Get('/city/:city_id')
+  async findByCityId(@Param('city_id') city_id: string) {
+    return await this.hotelService.findByCityId(+city_id);
   }
 
   @Get(':id')
@@ -26,8 +31,8 @@ export class HotelController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateHotelDto: UpdateHotelDto) {
-    return await this.hotelService.update(+id, updateHotelDto);
+  async update(@Param('id') id: string, @Body() dto: UpdateHotelDto) {
+    return await this.hotelService.update(+id, dto);
   }
 
   @Delete(':id')

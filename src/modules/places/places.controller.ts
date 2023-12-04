@@ -23,6 +23,16 @@ export class PlacesController {
     return await this.placesService.findOne(+id);
   }
 
+  @Get('/city/:city_id')
+  async findByCityId(@Param('city_id') city_id: string){
+    return await this.placesService.findByCityId(+city_id);
+  }
+
+  @Get('/country/:country_id')
+  async findByCountryId(@Param('country_id') country_id: string){
+    return await this.placesService.findByCountryId(+country_id);
+  }
+
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updatePlaceDto: UpdatePlaceDto) {
     return await this.placesService.update(+id, updatePlaceDto);

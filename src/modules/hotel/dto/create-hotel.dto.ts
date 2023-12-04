@@ -1,11 +1,8 @@
 import { IsArray, IsInt, IsNotEmpty, IsOptional, IsString } from "class-validator";
 import { LatLng } from "../../../core/country/types";
+import { ILink } from "../../../common/types/interfaces/link.interface";
 
 export class CreateHotelDto {
-    @IsNotEmpty()
-    @IsInt()
-    country_id: number | null;
-
     @IsNotEmpty()
     @IsInt()
     city_id: number | null;
@@ -18,4 +15,15 @@ export class CreateHotelDto {
     @IsOptional()
     @IsString()
     description?: string;
+
+    @IsOptional()
+    @IsString()
+    advantages?: string;
+
+    @IsOptional()
+    @IsString()
+    disadvantages?: string;
+
+    @IsOptional()
+    links?: ILink[];
 }

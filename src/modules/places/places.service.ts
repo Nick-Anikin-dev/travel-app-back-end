@@ -27,6 +27,22 @@ export class PlacesService {
     });
   }
 
+  async findByCityId(city_id: number) {
+    await this.placeRepository.find({
+      where: {
+        city_id
+      }
+    })
+  }
+
+  async findByCountryId(country_id: number) {
+    await this.placeRepository.find({
+      where: {
+        country_id
+      }
+    })
+  }
+
   async update(id: number, dto: UpdatePlaceDto) {
     return await this.placeRepository.update({
       id
