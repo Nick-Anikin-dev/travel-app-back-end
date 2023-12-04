@@ -5,6 +5,8 @@ import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Feedback } from "./entities/feedback.entity";
 import { Repository } from "typeorm";
+import { FindFeedbacksEntityParamsDto } from "./dto/find-feedbacks-entity-params.dto";
+import { FindFeedbacksQuery } from "./dto/find-feedbacks-query";
 
 @Injectable()
 export class FeedbackService {
@@ -16,10 +18,16 @@ export class FeedbackService {
     return await this.feedbackRepository.save(new_feedback);
   }
 
-  async findAll(user: AuthUser) {
+  async findAll(user: AuthUser, params: FindFeedbacksEntityParamsDto, query: FindFeedbacksQuery) {
+    const {order_by, order} = query;
+    const {related_entity_id, related_entity_type} = params;
     return await this.feedbackRepository.find({
       where: {
-        user_id: user.id
+        related_entity_id,
+        related_entity_type,
+      },
+      order: {
+        [order_by]: order,
       }
     });
   }

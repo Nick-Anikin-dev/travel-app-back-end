@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { FeedbackService } from './feedback.service';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { UpdateFeedbackDto } from './dto/update-feedback.dto';
 import { User } from "../../common/decotator/user.decorator";
 import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
+import { FindFeedbacksEntityParamsDto } from "./dto/find-feedbacks-entity-params.dto";
+import { FindFeedbacksQuery } from "./dto/find-feedbacks-query";
 
 @Controller('feedback')
 export class FeedbackController {
@@ -15,9 +17,13 @@ export class FeedbackController {
     return await this.feedbackService.create(dto, user);
   }
 
-  @Get()
-  async findAll(@User() user: AuthUser) {
-    return await this.feedbackService.findAll(user);
+  @Get(':related_entity_type/:related_entity_id')
+  async findAll(
+      @User() user: AuthUser,
+      @Param() params: FindFeedbacksEntityParamsDto,
+      @Query() query: FindFeedbacksQuery
+  ) {
+    return await this.feedbackService.findAll(user, params, query);
   }
 
   @Get(':id')

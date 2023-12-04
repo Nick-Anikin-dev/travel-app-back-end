@@ -1,7 +1,7 @@
 import { Column, Entity, JoinTable, ManyToMany } from "typeorm";
 import { BaseEntity } from "../../../common/types/base-entity";
 import { IFeedback } from "../../../core/feedback/feeback.interface";
-import { FeedbackEntityType } from "../../../core/feedback/types";
+import { FeedbackEntityType, FeedbackEntityTypeEnum } from "../../../core/feedback/types";
 import { User } from "../../user/entities/user.entity";
 
 @Entity('feedback')
@@ -31,10 +31,11 @@ export class Feedback extends BaseEntity implements IFeedback {
     related_entity_id: number;
 
     @Column({
-        type: 'varchar',
+        type: 'enum',
         nullable: false,
+        enum: FeedbackEntityTypeEnum,
     })
-    related_entity_type: FeedbackEntityType;
+    related_entity_type: FeedbackEntityTypeEnum;
 
     @ManyToMany(() => User, (user) => user.feedbacks)
     @JoinTable({

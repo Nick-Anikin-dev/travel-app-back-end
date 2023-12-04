@@ -1,5 +1,5 @@
-import { FeedbackEntityType } from "../../../core/feedback/types";
-import { IsInt, IsNotEmpty, IsString } from "class-validator";
+import { FeedbackEntityType, FeedbackEntityTypeEnum } from "../../../core/feedback/types";
+import { IsEnum, IsInt, IsNotEmpty, IsString } from "class-validator";
 
 export class CreateFeedbackDto {
     @IsNotEmpty()
@@ -7,7 +7,8 @@ export class CreateFeedbackDto {
     related_entity_id: number;
 
     @IsNotEmpty()
-    related_entity_type: FeedbackEntityType;
+    @IsEnum(FeedbackEntityTypeEnum)
+    related_entity_type: FeedbackEntityTypeEnum;
 
     @IsNotEmpty()
     @IsInt()
