@@ -8,13 +8,13 @@ import { FindFeedbacksEntityParamsDto } from "./dto/find-feedbacks-entity-params
 import { FindFeedbacksQuery } from "./dto/find-feedbacks-query";
 import { JwtAuthGuard } from "../../common/guard/jwt-auth.guard";
 
+@UseGuards(JwtAuthGuard)
 @Controller('feedback')
 export class FeedbackController {
   constructor(private readonly feedbackService: FeedbackService) {
   }
 
   @Post()
-  @UseGuards(JwtAuthGuard)
   async create(@User() user: AuthUser, @Body() dto: CreateFeedbackDto) {
     return await this.feedbackService.create(dto, user);
   }
