@@ -37,7 +37,7 @@ export class CityService {
             where: {
                 id
             },
-            relations: ['country', '']
+            relations: ['country', 'hotels', 'places']
         });
     }
 }
