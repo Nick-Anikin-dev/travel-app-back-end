@@ -82,11 +82,11 @@ export class AuthService {
     async changePassword(user: AuthUser, dto: ChangePasswordDto) {
         const {old_password, new_password, repeat_new_password} = dto;
         const target_user = await this.userService.findOne(user.id);
-        const isOldPasswordCorrect = await bcrypt.compare(old_password, target_user.password);
+        const isOldPasswordCorrect = await bcrypt.compare( target_user.password, old_password);
         if (!isOldPasswordCorrect) {
             throw new BadRequestException('Old password is incorrect')
         }
-        const isPasswordEquals = await bcrypt.compare(new_password, repeat_new_password);
+        const isPasswordEquals = new_password === repeat_new_password;
 
         if (!isPasswordEquals) {
             throw new BadRequestException('Passwords are not equal');
